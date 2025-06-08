@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&display=swap" rel="stylesheet">
+    <title>Mariane - 15 Anos ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "IM Fell DW Pica", serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 200vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Estrelas animadas */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Fotos posicionadas */
+        .photo {
+            position: fixed;
+            width: 220px;
+            height: 280px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            border: 4px solid #fff;
+            transition: transform 0.3s ease;
+            z-index: 10;
+        }
+
+        .photo:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .photo1 {
+            top: 80px;
+            left: 60px;
+            transform: rotate(-8deg);
+        }
+
+        .photo2 {
+            bottom: 80px;
+            right: 60px;
+            transform: rotate(8deg);
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Linha conectora */
+        .invisible-string {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .invisible-string svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .string-path {
+            fill: none;
+            stroke: #ff4757;
+            stroke-width: 4;
+            stroke-dasharray: 15, 8;
+            animation: stringGlow 3s ease-in-out infinite alternate, drawLine 4s ease-in-out;
+            filter: drop-shadow(0 0 10px #ff4757);
+        }
+
+        @keyframes stringGlow {
+            0% { 
+                filter: drop-shadow(0 0 8px #ff4757);
+                stroke-opacity: 0.8;
+            }
+            100% { 
+                filter: drop-shadow(0 0 20px #ff4757) drop-shadow(0 0 35px #ff4757);
+                stroke-opacity: 1;
+            }
+        }
+
+        @keyframes drawLine {
+            0% { stroke-dashoffset: 1200; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        /* Container central com texto */
+        .central-content {
+            position: relative;
+            margin: 60vh auto 20px;
+            text-align: center;
+            z-index: 15;
+            max-width: 500px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        /* Seção adicional para scroll */
+        .additional-content {
+            position: relative;
+            z-index: 15;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            color: #fff;
+            text-align: center;
+        }
+
+        .additional-content h2 {
+            color: #ff8e8e;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .additional-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .memory-card {
+            background: rgba(255, 71, 87, 0.1);
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            font-size: larger;
+        }
+
+        .memory-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .memory-card .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .memory-card h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .main-title {
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            margin-bottom: 30px;
+        }
+
+        .main-title h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffa8a8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .main-title .subtitle {
+            font-size: 1.6rem;
+            color: #ffd700;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .main-title .date {
+            font-size: 1.3rem;
+            color: #ff8e8e;
+            margin-bottom: 25px;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 15px #ff6b6b); }
+            to { filter: drop-shadow(0 0 25px #ff8e8e); }
+        }
+
+        /* Timer contador */
+        .friendship-timer {
+            background: rgba(255, 71, 87, 0.2);
+            border: 2px solid #ff4757;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .timer-title {
+            color: #ffd700;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .timer-display {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .timer-unit {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px 8px;
+            text-align: center;
+        }
+
+        .timer-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            display: block;
+        }
+
+        .timer-label {
+            font-size: 0.9rem;
+            color: #fff;
+            margin-top: 5px;
+        }
+
+        /* Mensagem especial */
+        .message {
+            color: #fff;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        .message p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #ffd700;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            padding: 20px;
+            border-left: 4px solid #ff4757;
+            background: rgba(255, 71, 87, 0.1);
+            border-radius: 10px;
+        }
+
+        /* Botão interativo */
+        .birthday-button {
+            background: linear-gradient(45deg, #ff4757, #ff6b6b);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
+        }
+
+        .birthday-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 71, 87, 0.6);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .main-title h1 {
+                font-size: 2.5rem;
+            }
+            
+            .photo {
+                width: 160px;
+                height: 200px;
+            }
+            
+            .photo1 {
+                top: 50px;
+                left: 20px;
+            }
+            
+            .photo2 {
+                bottom: 50px;
+                right: 20px;
+            }
+            
+            .central-content {
+                max-width: 90%;
+                padding: 25px;
+            }
+            
+            .timer-display {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            .timer-number {
+                font-size: 1.5rem;
+            }
+
+            .player {
+                position: relative;
+                left: 10rem;
+            }
+        }
+    </style>
+</head>
+<body>
+        <audio autoplay>
+        <source src="./Taylor Swift – invisible string (Official Lyric Video).mp3">
+        </audio>
+
+    <div class="stars"></div>
+    
+    <!-- Fotos -->
+    <div class="photo photo1">
+        <img src="./img01.jpg" alt="Foto da Mariane" />
+    </div>
+    
+    <div class="photo photo2">
+        <img src="./img02.jpg" alt="Foto da Mariane" />
+    </div>
+
+    <!-- Linha conectora -->
+    <div class="invisible-string">
+        <svg>
+            <path class="string-path" d="" />
+        </svg>
+    </div>
+
+    <!-- Conteúdo central -->
+    <div class="central-content">
+        <div class="main-title">
+            <h1>Mariane</h1>
+            <div class="subtitle"> 15 Anos </div>
+            <div class="date">14 de Junho de 2025</div>
+        </div>
+
+        <div class="friendship-timer">
+            <div class="timer-title">Nossa amizade há:</div>
+            <div class="timer-display">
+                <div class="timer-unit">
+                    <span class="timer-number" id="days">0</span>
+                    <div class="timer-label">Dias</div>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-number" id="hours">0</span>
+                    <div class="timer-label">Horas</div>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-number" id="minutes">0</span>
+                    <div class="timer-label">Minutos</div>
+                </div>
+                <div class="timer-unit">
+                    <span class="timer-number" id="seconds">0</span>
+                    <div class="timer-label">Segundos</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="message">
+            <p>É tão bonito pensar que todo esse tempo existia algum fio invisível amarrando você em mim.</p>
+            
+            <div class="quote">
+                "Time, curious time, gave me no compasses, gave me no signs<br>
+                Were there clues I didn't see?"
+            </div>
+            
+            <p>Como a Taylor diz, existem fios que conectam pessoas incríveis que se merecem, e a prova disso é a nossa amizade. Não foi por acaso, foi algo destinado a acontecer.</p>
+            
+            <button class="birthday-button" onclick="showSurprise()">
+                Surpresa especial! 🎁
+            </button>
+        </div>
+    </div>
+
+    <!-- Conteúdo adicional para scroll -->
+    <div class="additional-content">
+        <h2>Tudo que sinto por você em palavras.</h2>
+        <p>Cada momento da nossa amizade é de extrema importância para mim. Você trouxe felicidade para a minha vida desde o primeiro dia que nos conhecemos, saiba que eu guardo isso com muito carinho.</p>
+        
+        <p>A Amizade: Uma Jornada de Conexões, Desafios e Crescimento
+
+A amizade é, sem dúvida, uma das experiências mais preciosas e significativas da vida humana. Ela não é apenas uma relação de companheirismo, mas um elo profundo, que se estabelece por meio de um entendimento mútuo, de uma troca sincera de sentimentos, de confiança e de respeito. Pode começar de formas simples e espontâneas, como em um sorriso trocado entre duas pessoas em uma sala cheia de desconhecidos, ou em uma conversa casual que, por acaso, revela afinidades inusitadas. Mas, como toda relação humana, a amizade cresce e se transforma ao longo do tempo, desafiando as expectativas, aprofundando-se nas dificuldades e, muitas vezes, se renovando em momentos de crise.
+
+Uma das maravilhas da amizade é justamente o fato de que ela não é uma imposição da vida. Ao contrário dos laços familiares, que muitas vezes nos são impostos, a amizade nasce da escolha genuína do outro, e essa escolha é o que a torna especial. A amizade é uma conexão voluntária, sem pressões externas, e isso confere a ela uma liberdade única. Nenhuma amizade verdadeira é forçada, e nenhum laço é superficial; ela se constrói a partir da aceitação incondicional e da confiança mútua.
+
+A Evolução da Amizade ao Longo da Vida
+Na infância, as amizades são formadas principalmente por meio de atividades lúdicas e experiências compartilhadas. Nessa fase, a amizade está intimamente ligada à espontaneidade e à inocência, sendo mais baseada na presença física e na companhia do que em profundas reflexões sobre o outro. É comum que os amigos da infância compartilhem brincadeiras, segredos simples e sonhos de infância, como aqueles que envolvem castelos imaginários ou aventuras sem fim. No entanto, mesmo nesse período, há algo de profundamente importante na amizade. É quando aprendemos os primeiros conceitos de confiança, de partilha e de empatia. O amigo da infância não é apenas uma figura de diversão, mas também aquele que nos ensina sobre a lealdade, o respeito pelos sentimentos alheios e a construção de relações sólidas.
+
+Quando chegamos à adolescência, a amizade assume um novo papel. Nessa fase da vida, estamos em processo de autodescoberta, buscando definir quem somos e como nos relacionamos com o mundo. Os amigos, agora, tornam-se muito mais do que meros companheiros de brincadeiras; eles se tornam cúmplices das nossas inseguranças, dos nossos medos e das nossas maiores ambições. São os amigos que nos ajudam a descobrir o que significa ser “eu” no mundo, e muitas vezes, por meio da amizade, passamos a entender melhor quem realmente somos, o que nos faz felizes, e o que buscamos na vida. Durante a adolescência, os amigos se tornam os maiores confidentes, aqueles que dividem com a gente não apenas as alegrias, mas também os desafios internos, como as angústias existenciais e as complexas questões do coração. Eles são os primeiros a nos entender sem julgamentos e, muitas vezes, são a nossa principal fonte de apoio emocional.
+
+Na fase adulta, a amizade ganha uma nova dimensão. Muitas vezes, as responsabilidades da vida adulta — trabalho, família, compromissos financeiros — podem criar um cenário onde o tempo se torna uma mercadoria escassa. Os amigos, no entanto, continuam a ser uma âncora, um alicerce que nos mantém firmes em meio às tempestades da vida cotidiana. É nessa fase que muitas amizades passam pelo teste do tempo. Amigos de longa data são aqueles que conhecem nossas histórias, que compartilham conosco memórias e experiências, e que se tornam quase como uma extensão de nós mesmos. Nesse período, a amizade não está mais centrada apenas em momentos de lazer ou de diversão, mas também no apoio mútuo em tempos de crise, nas discussões filosóficas sobre o sentido da vida, nos conselhos práticos sobre carreira e família, e, acima de tudo, no conforto diante das perdas e frustrações.
+
+Por fim, na velhice, a amizade assume um caráter de reflexão e rememoração. Muitos dos amigos de uma vida inteira tornam-se companheiros fiéis que observam a jornada do outro com uma perspectiva única. Eles são testemunhas da história, daqueles momentos que definiram quem somos e como chegamos até aqui. Embora o corpo envelheça, a amizade, na melhor das hipóteses, amadurece, tornando-se mais apreciada, mais cuidadosa e mais cheia de gratidão pelos momentos compartilhados. E, quando a partida de um amigo se aproxima, a dor da separação é suavizada pela certeza de que o vínculo vivido ao longo dos anos é imortalizado na memória e no coração.
+
+Os Desafios da Amizade: Quando o Caminho se Torna Turbulento
+Embora a amizade seja uma fonte de alegria, ela também carrega consigo desafios que precisam ser superados para que ela floresça. Como qualquer relação humana, a amizade está sujeita a mal-entendidos, distâncias emocionais e até mesmo a rupturas dolorosas. No entanto, é justamente através desses desafios que muitas amizades amadurecem e se solidificam.
+
+Um dos maiores desafios da amizade é a comunicação. Muitas vezes, as pessoas se afastam não porque deixaram de se importar, mas porque falharam em comunicar suas necessidades e sentimentos de forma clara. Desentendimentos, silêncios prolongados e falta de atenção às necessidades emocionais do outro podem desgastar a relação. É nesse ponto que a amizade verdadeira se diferencia das outras relações sociais, pois ela exige uma disposição constante para o diálogo, para a escuta ativa e para a disposição de resolver conflitos. Quando um amigo se afasta, é a sinceridade e o desejo de resolver as questões pendentes que podem restaurar a conexão perdida.
+
+Outro grande desafio é a mudança. À medida que envelhecemos, passamos por transformações internas e externas que podem afetar nossas amizades. Mudanças de valores, de interesses ou até mesmo de estilos de vida podem colocar à prova a continuidade de uma amizade. Amigos podem se afastar por diferentes razões — uma mudança de cidade, um novo ciclo de vida, um novo foco profissional. No entanto, mesmo diante da mudança, é possível preservar os laços, desde que haja a vontade de manter a amizade viva, respeitando as novas realidades e prioridades de cada um. A verdadeira amizade é aquela que sabe se adaptar, que entende que a vida é feita de fases e que, mesmo nas transformações, há sempre espaço para o afeto genuíno.
+
+A Filosofia da Amizade: Um Conceito Universitário e Atemporal
+Ao longo da história da filosofia, a amizade foi tema de intensas reflexões. Platão, por exemplo, acreditava que a amizade era uma manifestação da verdadeira bondade e da busca pela verdade. Para ele, os amigos eram os companheiros mais próximos na busca pela sabedoria, pois compartilham não apenas os mesmos valores, mas também o desejo de melhorar e evoluir como seres humanos. Aristóteles, em sua obra Ética a Nicômaco, introduziu a ideia de que existem diferentes tipos de amizade: a amizade de prazer, que é baseada em interesses mútuos e que pode ser passageira; a amizade de utilidade, que ocorre quando ambos os amigos se beneficiam de alguma maneira da relação; e, por fim, a amizade de virtude, que é aquela em que os amigos se atraem pela excelência moral e pelo bem mútuo, e que é considerada a forma mais alta e duradoura de amizade.
+
+No entanto, o conceito de amizade não se limita à filosofia grega antiga. Em muitas culturas e tradições religiosas, a amizade é vista como um valor profundo e espiritual. No cristianismo, por exemplo, Jesus Cristo é considerado o exemplo perfeito de amizade, pois amou seus discípulos incondicionalmente, ensinando-os sobre o amor altruísta e a importância de servir ao próximo. Na literatura, a amizade sempre foi um tema recorrente. Obras como Os Três Mosqueteiros, de Alexandre Dumas, e O Senhor dos Anéis, de J.R.R. Tolkien, exploram a amizade como um laço poderoso que transcende adversidades e marca profundamente as vidas dos personagens.
+
+Conclusão: A Amizade como Pilar da Vida Humana
+Em última análise, a amizade é um dos maiores tesouros da vida humana. Ela é a cola que mantém as pessoas unidas, que cria sentido nas jornadas individuais e coletivas, e que proporciona à vida uma profundidade que as outras relações não conseguem oferecer. A amizade é o lugar onde somos aceitos em nossa totalidade, com todas as nossas imperfeições e virtudes. Ela é um reflexo da verdadeira humanidade, pois se constrói sobre a base do respeito mútuo, da compreensão, da generosidade e da liberdade.
+
+Cultivar e manter uma amizade verdadeira exige dedicação, mas também traz recompensas inestimáveis. Em um mundo frequentemente marcado pela superficialidade e pela pressa, a amizade se destaca como um farol de autenticidade e de conexão profunda. Por meio dela, encontramos o verdadeiro significado do que é estar vivo, do que é amar sem reservas e de como, juntos, podemos enfrentar os desafios da vida com coragem, compaixão e um coração aberto.
+
+E, assim, seguimos a jornada da amizade, sabendo que os laços que criamos, as risadas que compartilhamos e os momentos de silêncio confortável serão sempre uma parte inse</p>
+        
+        <div class="quote">
+            "Isn't it just so pretty to think<br>
+            All along there was some invisible string<br>
+            Tying you to me?"
+        </div>
+        
+        <p>Mariane, que este novo ano da sua vida seja repleto de realizações, sorrisos e momentos inesquecíveis. Nossa amizade é um dos presentes mais preciosos que a vida me deu! 🎂✨</p>
+    </div>
+    <script>
+        // Data quando vocês se conheceram: 03/06/2023 às 23:32
+        const friendshipStart = new Date('2023-06-03T23:32:00');
+
+        // Função para atualizar o timer
+        function updateTimer() {
+            const now = new Date();
+            const difference = now - friendshipStart;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        // Atualizar timer a cada segundo
+        setInterval(updateTimer, 1000);
+        updateTimer(); // Chamada inicial
+
+        // Criar estrelas animadas
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numberOfStars = 60;
+            
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Atualizar caminho da linha conectora
+        function updateStringPath() {
+            const path = document.querySelector('.string-path');
+            const photo1 = document.querySelector('.photo1');
+            const photo2 = document.querySelector('.photo2');
+            
+            if (path && photo1 && photo2) {
+                const rect1 = photo1.getBoundingClientRect();
+                const rect2 = photo2.getBoundingClientRect();
+                
+                const startX = rect1.left + rect1.width / 2;
+                const startY = rect1.top + rect1.height / 2;
+                const endX = rect2.left + rect2.width / 2;
+                const endY = rect2.top + rect2.height / 2;
+                
+                // Curva mais suave passando pelo centro
+                const midX = window.innerWidth / 2;
+                const midY = window.innerHeight / 2;
+                
+                const pathData = `M ${startX} ${startY} Q ${midX} ${midY} ${endX} ${endY}`;
+                path.setAttribute('d', pathData);
+            }
+        }
+
+        // Função surpresa
+        function showSurprise() {
+            // Criar corações flutuantes
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    createFloatingHeart();
+                }, i * 150);
+            }
+            
+            // Mensagem especial
+            setTimeout(() => {
+                alert('Muito obrigada por melhorar os meus dias, você é extremamente importante para mim. Eu te amo muito.');
+            }, 1500);
+        }
+
+        function createFloatingHeart() {
+            const hearts = ['❤️', '💖', '💕', '💗', '🌟'];
+            const heart = document.createElement('div');
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = '100%';
+            heart.style.fontSize = Math.random() * 25 + 20 + 'px';
+            heart.style.zIndex = '1000';
+            heart.style.pointerEvents = 'none';
+            heart.style.animation = 'floatUp 4s ease-out forwards';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                if (document.body.contains(heart)) {
+                    document.body.removeChild(heart);
+                }
+            }, 4000);
+        }
+
+        // Adicionar animação de flutuação
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Inicializar tudo
+        createStars();
+        window.addEventListener('load', updateStringPath);
+        window.addEventListener('resize', updateStringPath);
+    </script>
+</body>
+</html>
